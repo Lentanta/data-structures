@@ -1,0 +1,15 @@
+{
+  "name": "data-structures",
+  "version": "1.0.0",
+  "description": "Data structures in Typescript",
+  "main": "index.js",
+  "author": "ThanhTam",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.19.11"
+  },
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --outfile=index.js"
+  }
+}
