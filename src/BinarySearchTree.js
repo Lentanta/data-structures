@@ -1,3 +1,5 @@
+import { Queue } from "./Queue.js";
+
 class TreeNode {
   constructor(value) {
     this.value = value;
@@ -83,15 +85,57 @@ export class BinarySearchTree {
   BFS() {
     let node = this.root;
     let data = [];
-    let queue = [node];
 
-    while (queue.length) {
-      node = queue.shift();
+    let queue = new Queue();
+    queue.enqueue(node);
+
+    while (queue.size) {
+      node = queue.dequeue();
       data.push(node);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+
+      if (node.left) queue.enqueue(node.left);
+      if (node.right) queue.enqueue(node.right);
     }
 
+    return data;
+  }
+
+  DFSPreOrder() {
+    let data = [];
+
+    const traverse = (node) => {
+      data.push(node);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    };
+
+    traverse(this.root);
+    return data;
+  }
+
+  DFSPostOrder() {
+    let data = [];
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node);
+    };
+
+    traverse(this.root);
+    return data;
+  }
+
+  DFSInOrder() {
+    let data = [];
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      data.push(node);
+      if (node.right) traverse(node.right);
+    };
+
+    traverse(this.root);
     return data;
   }
 }
